@@ -7,20 +7,64 @@ body {
     box-sizing: border-box;
     margin: auto;
     padding: 1em;
-  }
+}
+  
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1em;
+  padding: 1em;
+}
 
-/* Legend container layout */
+header h1 {
+  margin: 0;
+  font-size: 1.5em;
+  white-space: nowrap;
+}
+
+header label {
+  display: flex;
+  flex-direction: row;
+  font-size: 1em;
+}
+
+.slider-container {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+
+.time-display {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end; /* align em and time to the right */
+  font-size: 0.9em;
+}
+
+time,
+em {
+  display: block;
+  margin: 0;
+}
+
+em {
+  color: #888;
+  font-style: italic;
+}
+
+
+/* Legend item appearance */
 .legend {
   display: flex;
-  gap: 1px; /* Very small gap for block-style look */
-  margin-block: 1em;
+  gap: 1px;              /* Small gap between blocks */
+  margin-block: 1em;     /* Vertical spacing above/below the legend */
   font-family: sans-serif;
   width: 100%;
 }
 
-/* Legend item appearance */
 .legend > div {
-  width: 100%;
+  flex: 1;               /* Equal width for each item */
   --color-departures: steelblue;
   --color-arrivals: darkorange;
   --color: color-mix(
@@ -28,10 +72,9 @@ body {
     var(--color-departures) calc(100% * var(--departure-ratio)),
     var(--color-arrivals)
   );
-  fill: var(--color);
-  background-color: var(--color);
-  padding: 0.5em 1em;
   background-color: var(--color);
   color: white;
   font-weight: bold;
+  padding: 0.5em 1em;
+  text-align: center;
 }

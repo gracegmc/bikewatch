@@ -9,32 +9,6 @@ body {
   align-items: center; /* Center vertically */
 }
 
-header {
-    display: flex;
-    gap: 1em;
-    align-items: baseline;
-}
-  
-header h1 {
-    margin-right: auto;
-}
-  
-header label {
-    margin-left: auto;
-}
-  
-time,
-em {
-    display: block;
-    margin-top: 0.25em;
-}
-  
-em {
-    color: #888;
-    font-style: italic;
-}
-  
-
 #map {
   width: 100%; /* Adjust width to your desired size */
   height: 100%; /* Adjust height to your desired size */
