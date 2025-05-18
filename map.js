@@ -170,12 +170,37 @@ map.on('load', async () => {
         .attr('r', d => radiusScale(d.totalTraffic)) // Radius of the circle
         .style('--departure-ratio', (d) =>
             stationFlow(d.departures / d.totalTraffic),
-        )
-        .each(function (d) {
-            // Append a <title> element for browser tooltip
-            d3.select(this)
-            .attr('title', d => `${d.totalTraffic} trips (${d.departures} departures, ${d.arrivals} arrivals)`);
+        );
+        // .each(function (d) {
+        //     // Append a <title> element for browser tooltip
+        //     d3.select(this)
+        //     .attr('title', d => `${d.totalTraffic} trips (${d.departures} departures, ${d.arrivals} arrivals)`);
+        // });
+
+    // tooltip
+    const tooltip = d3.select('#tooltip');
+    circles
+        .on('mouseover', function (event, d) {
+            tooltip
+            .style('display', 'block')
+            .html(`
+                <strong>${d.name}</strong><br>
+                ${d.totalTraffic} trips<br>
+                ${d.departures} departures<br>
+                ${d.arrivals} arrivals
+            `);
+            d3.select(this).attr('stroke', 'white').attr('stroke-width', 2);
+        })
+        .on('mousemove', function (event) {
+            tooltip
+            .style('left', (event.pageX + 10) + 'px')
+            .style('top', (event.pageY - 20) + 'px');
+        })
+        .on('mouseout', function () {
+            tooltip.style('display', 'none');
+            d3.select(this).attr('stroke', null);
         });
+
 
     
     // reactive sliders
