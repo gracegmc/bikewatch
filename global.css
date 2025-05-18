@@ -1,6 +1,6 @@
 body {
     font: 100%/1.5 system-ui, sans-serif;
-    display: flex;
+    display: flexbox;
     flex-flow: column;
     max-width: 80em;
     min-height: 100vh;
@@ -8,4 +8,30 @@ body {
     margin: auto;
     padding: 1em;
   }
-  
+
+/* Legend container layout */
+.legend {
+  display: flex;
+  gap: 1px; /* Very small gap for block-style look */
+  margin-block: 1em;
+  font-family: sans-serif;
+  width: 100%;
+}
+
+/* Legend item appearance */
+.legend > div {
+  width: 100%;
+  --color-departures: steelblue;
+  --color-arrivals: darkorange;
+  --color: color-mix(
+    in oklch,
+    var(--color-departures) calc(100% * var(--departure-ratio)),
+    var(--color-arrivals)
+  );
+  fill: var(--color);
+  background-color: var(--color);
+  padding: 0.5em 1em;
+  background-color: var(--color);
+  color: white;
+  font-weight: bold;
+}

@@ -133,8 +133,8 @@ map.on('load', async () => {
         }
     let stations = computeStationTraffic(jsonData.data.stations, trips);
     // console.log('Stations Array:', stations); //debugging log
+    let stationFlow = d3.scaleQuantize().domain([0, 1]).range([0, 0.5, 1]);
 
-    
 
     const departures = d3.rollup(
         trips,
@@ -168,6 +168,9 @@ map.on('load', async () => {
         .enter()
         .append('circle')
         .attr('r', d => radiusScale(d.totalTraffic)) // Radius of the circle
+        .style('--departure-ratio', (d) =>
+            stationFlow(d.departures / d.totalTraffic),
+        )
         .each(function (d) {
             // Append a <title> element for browser tooltip
             d3.select(this)
@@ -226,11 +229,16 @@ map.on('load', async () => {
         circles
             .data(filteredStations, (d) => d.short_name)
             .join('circle') // Ensure the data is bound correctly
+            .style('--departure-ratio', (d) =>
+                stationFlow(d.departures / d.totalTraffic),
+            )
             .attr('r', (d) => radiusScale(d.totalTraffic)); // Update circle sizes
     }
 
     timeSlider.addEventListener('input', updateTimeDisplay);
     updateTimeDisplay();
+
+
     // Initial position update when map loads
     updatePositions();
         
